@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
-// 首屏不要异步加载,避免白屏
+
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
   },
   {
     path: '/about',
