@@ -19,9 +19,13 @@
   },
   "homepage": "https://github.com/CoderQiQin521/koa-template#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
+    "koa-body": "^4.1.3",
     "koa-cors": "0.0.16",
     "koa-router": "^8.0.8",
+    "mongoose": "^5.9.15",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.7"
   }

@@ -1,13 +1,14 @@
 const Koa = require('koa')
 const cors = require('koa-cors')
 const app = new Koa()
+const koaBody = require('koa-body')
 
 const router = require('./routes')
 
-app.use(cors())
-app.use((ctx) => {
-  ctx.body = 'hello world'
-})
+app.use(cors()).use(koaBody())
+// app.use((ctx) => {
+//   ctx.body = 'hello world'
+// })
 
 app.use(router.routes())
 app.use(router.allowedMethods())
