@@ -1,6 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
 import { UserModel } from './user.model';
+import { jwt } from 'jsonwebtoken';
+console.log('jwt: ', jwt);
 
+class UserData {
+  @ApiProperty({
+    description: '手机号码',
+    example: '18538300839',
+  })
+  username: string;
+  @ApiProperty({
+    description: '密码',
+    example: '123456',
+  })
+  password: string;
+}
+
+@ApiTags('用户模块')
 @Controller('user')
 export class UserController {
   @Get()
@@ -18,4 +35,24 @@ export class UserController {
       realname: '齐秦',
     });
   }
+  @ApiOperation({
+    summary: '注册',
+  })
+  @Post('/register')
+  async register(@Body() body: UserData) {
+    console.log('body: ', body);
+    let { username } = await UserModel.create(body);
+    return {
+      code: 0,
+      data: {
+        username,
+        token: '123',
+      },
+    };
+  }
+  @ApiOperation({
+    summary: '登录',
+  })
+  @Post('/login')
+  async login() {}
 }

@@ -1,6 +1,8 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 export class User {
-  @prop()
+  @prop({
+    unique: true,
+  })
   username: string;
   @prop()
   password: string;
