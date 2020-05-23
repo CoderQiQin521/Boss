@@ -4,7 +4,10 @@ const { SuccessMessage, ErrorMessage } = require('../utils/message')
 
 module.exports = {
   index: async (ctx) => {
-    ctx.body = await userModel.find()
+    ctx.body = new SuccessMessage({
+      data: await userModel.find(),
+      msg: '获取成功',
+    })
   },
   register: async (ctx) => {
     let user = ctx.request.body
