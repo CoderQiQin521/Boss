@@ -24,7 +24,7 @@
       </div>
       <div class="info">
         <div class="info-item" v-for="(item,index) in infos" :key="index">
-          <div class="info-count">{{item.count}}</div>
+          <div class="info-count">{{item.count>99 ? '99+' : item.count}}</div>
           <div class="info-title">{{item.title}}</div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default {
 }
 .username {
   font-size: 26px;
-  font-weight: bold;
+  // font-weight: bold;
 }
 .edit-icon {
   margin-right: 5px;
