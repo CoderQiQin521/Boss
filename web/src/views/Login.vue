@@ -15,7 +15,7 @@
       </van-cell-group>
       <van-button type="primary" block @click="login">登录</van-button>
       <div class="mt-sm">
-        <router-link to="/">去注册</router-link>
+        <router-link to="/register">去注册</router-link>
       </div>
     </div>
   </div>

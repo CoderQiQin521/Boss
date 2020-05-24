@@ -6,6 +6,7 @@
 
 <style lang="less">
 @fc: #5d5d5d;
+@primary: #36c1ba;
 #app {
   height: 100%;
 }
