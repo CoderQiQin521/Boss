@@ -1,21 +1,29 @@
 <template>
-  <div>
-    <div class="title">账号登录</div>
-    <form @submit.prevent="login">
-      <div>
-        <input type="text" v-model="user.username" />
+  <div class="page">
+    <div>
+      <div class="page-title">账号登录</div>
+      <van-cell-group>
+        <van-field
+          v-model="user.username"
+          type="tel"
+          label="+86"
+          clearable
+          autofocus
+          maxlength="11"
+        />
+        <van-field v-model="user.password" type="password" label="密码" maxlength="20" />
+      </van-cell-group>
+      <van-button type="primary" block @click="login">登录</van-button>
+      <div class="mt-sm">
+        <router-link to="/">去注册</router-link>
       </div>
-      <div>
-        <input type="password" v-model="user.password" placeholder="请输入密码" />
-      </div>
-      <button type="submit">登录</button>
-    </form>
+    </div>
   </div>
 </template>
+
 <script>
+import { Toast } from "vant";
 export default {
-  name: "",
-  props: {},
   data() {
     return {
       user: {
@@ -25,17 +33,48 @@ export default {
     };
   },
   created() {},
-  mounted() {},
+  computed: {
+    isValid() {
+      let user = this.user;
+      return user.username && user.password;
+      //  && user.username.length === 11;
+    }
+  },
   methods: {
     async login() {
+      // todo: 表单验证
+      if (!this.isValid) {
+        Toast("账号或密码错误");
+        return;
+      }
       let { code, data, msg } = await this.$api.login(this.user);
-      console.log("code, data, msg: ", code, data, msg);
       if (code === 0) {
-        this.$router.push("/");
+        /*
+          登陆成功:
+          1.localStorage存储token
+          2.跳转页面
+        */
+        localStorage.setItem("token", data);
+        // this.$router.push("/");
+      } else if (code === 1) {
+        this.user = {
+          username: "",
+          password: ""
+        };
       }
     }
   }
 };
 </script>
-<style lang="less" scoped>
+
+<style lang="less" socped>
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.info {
+  margin: 20px;
+}
 </style>

@@ -16,5 +16,4 @@ const schema = mongoose.Schema({
   },
   realname: String,
 })
-// new Schema('user',Schema)
 module.exports = mongoose.model('user', schema)

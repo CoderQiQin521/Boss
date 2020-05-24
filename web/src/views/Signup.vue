@@ -1,45 +1,75 @@
 <template>
   <div class="page">
-    <h3 class="title">注册BOSS直聘</h3>
-    <ul>
-      <li v-for="item in list" :key="item.id">{{item.title}}</li>
-    </ul>
+    <div>
+      <div class="page-title">手机号注册</div>
+      <van-cell-group>
+        <van-field
+          v-model="user.username"
+          type="tel"
+          label="+86"
+          clearable
+          autofocus
+          maxlength="11"
+        />
+        <van-field v-model="user.password" type="password" label="密码" maxlength="20" />
+      </van-cell-group>
+      <van-button type="primary" block @click="register">立即注册</van-button>
+      <div class="mt-sm">
+        <router-link to="/login">账号密码登录</router-link>
+      </div>
+    </div>
+
+    <div class="info text-center">
+      阅读
+      <span class="text-light">《用户协议及隐私政策》</span>
+    </div>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   data() {
     return {
-      list: []
+      user: {
+        username: "",
+        password: ""
+      }
     };
   },
-  async created() {
-    let { code, data, msg } = await this.$api.test();
-    console.log("code, data, msg: ", code, data, msg);
-    this.list = data;
-    console.log(data[3]);
-
-    // this.$api
-    //   .test()
-    //   .then(res => {
-    //     let { code, data, msg } = res;
-    //     console.log("code, data, msg: ", code, data, msg);
-    //   })
-    //   .catch(err => {
-    //     console.error("err: ", err);
-    //   });
+  created() {},
+  computed: {
+    isValid() {
+      let user = this.user;
+      return user.username && user.password && user.username.length === 11;
+    }
+  },
+  methods: {
+    async register() {
+      if (!this.isValid) {
+        Toast("信息不正确");
+        return;
+      }
+      let { code, data, msg } = await this.$api.register(this.user);
+      if (code === 0) {
+        Toast(msg);
+        setTimeout(() => {
+          this.$router.push("/login");
+        }, 1500);
+      }
+    }
   }
 };
 </script>
 
 <style lang="less" socped>
-.title {
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 32px;
-  color: #5dd5c8;
-  position: relative;
-  text-align: center;
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.info {
+  margin: 20px;
 }
 </style>
