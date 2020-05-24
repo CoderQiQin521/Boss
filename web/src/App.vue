@@ -26,6 +26,9 @@ body {
 .text-center {
   text-align: center;
 }
+.text-right {
+  text-align: right;
+}
 .mt-sm {
   margin-top: 10px;
 }

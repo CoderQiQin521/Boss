@@ -14,6 +14,21 @@ const routes = [
         path: "/",
         name: "user",
         component: () => import(/* webpackChunkName: "user" */ "../views/User.vue")
+      },
+      {
+        path: "/position",
+        name: "position",
+        component: () => import(/* webpackChunkName: "position" */ "../views/Position.vue")
+      },
+      {
+        path: "/company",
+        name: "company",
+        component: () => import(/* webpackChunkName: "company" */ "../views/Company.vue")
+      },
+      {
+        path: "/message",
+        name: "message",
+        component: () => import(/* webpackChunkName: "message" */ "../views/Message.vue")
       }
     ]
   },
@@ -26,6 +41,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import(/* webpackChunkName: "login" */ "../views/Login.vue")
+  },
+  {
+    path: "/resume",
+    name: "resume",
+    component: () => import(/* webpackChunkName: "resume" */ "../views/Resume.vue")
   }
 ];
 

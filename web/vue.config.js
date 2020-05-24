@@ -24,12 +24,13 @@ module.exports = {
   },
   productionSourceMap: false,
   devServer: {
-    proxy: {
-      "/api": {
-        target: "<url>",
-        ws: true,
-        changeOrigin: true
-      }
-    }
+    disableHostCheck: true
+    // proxy: {
+    //   "/api": {
+    //     target: "<url>",
+    //     ws: true,
+    //     changeOrigin: true
+    //   }
+    // }
   }
 };

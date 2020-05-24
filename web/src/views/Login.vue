@@ -13,7 +13,7 @@
         />
         <van-field v-model="user.password" type="password" label="密码" maxlength="20" />
       </van-cell-group>
-      <van-button type="primary" block @click="login">登录</van-button>
+      <van-button type="primary" color="#36c1ba" block @click="login">登录</van-button>
       <div class="mt-sm">
         <router-link to="/register">去注册</router-link>
       </div>
@@ -55,7 +55,7 @@ export default {
           2.跳转页面
         */
         localStorage.setItem("token", data);
-        // this.$router.push("/");
+        this.$router.push("/");
       } else if (code === 1) {
         this.user = {
           username: "",
@@ -68,6 +68,7 @@ export default {
 </script>
 
 <style lang="less" socped>
+@primary: #36c1ba;
 .page {
   display: flex;
   flex-direction: column;
@@ -76,5 +77,9 @@ export default {
 }
 .info {
   margin: 20px;
+}
+/deep/.van-button--primary {
+  background-color: @primary!important;
+  border-color: @primary!important;
 }
 </style>

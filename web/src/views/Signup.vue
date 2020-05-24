@@ -13,7 +13,7 @@
         />
         <van-field v-model="user.password" type="password" label="密码" maxlength="20" />
       </van-cell-group>
-      <van-button type="primary" block @click="register">立即注册</van-button>
+      <van-button type="primary" color="#36c1ba" block @click="register">立即注册</van-button>
       <div class="mt-sm">
         <router-link to="/login">账号密码登录</router-link>
       </div>
