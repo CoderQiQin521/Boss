@@ -3,7 +3,7 @@ import Vue from "vue";
 import { Toast } from "vant";
 
 const http = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://127.0.0.1:3000/api",
   timeout: 6000
 });
 

@@ -7,7 +7,11 @@
       left-arrow
       @click-left="$router.back()"
       @click-right="onClickRight"
-    />
+    >
+      <template #right>
+        <van-icon name="browsing-history-o" size="18" class="#5d5d5d" />
+      </template>
+    </van-nav-bar>
     <div class="page">23423</div>
   </div>
 </template>
@@ -23,5 +27,8 @@ export default {
   methods: {}
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
+.van-nav-bar__text {
+  color: #5d5d5d;
+}
 </style>

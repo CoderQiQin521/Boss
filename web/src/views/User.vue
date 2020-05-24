@@ -18,6 +18,7 @@
           round
           width="70px"
           height="70px"
+          @click="$router.push('/info')"
           src="https://img.yzcdn.cn/vant/cat.jpeg"
         />
       </div>

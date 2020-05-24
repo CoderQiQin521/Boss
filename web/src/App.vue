@@ -35,4 +35,10 @@ body {
 .text-light {
   color: #509799;
 }
+.van-nav-bar__text {
+  color: #5d5d5d;
+}
+.van-nav-bar .van-icon {
+  color: #5d5d5d;
+}
 </style>
