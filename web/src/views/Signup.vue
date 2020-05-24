@@ -12,6 +12,7 @@
           maxlength="11"
         />
         <van-field v-model="user.password" type="password" label="密码" maxlength="20" />
+        <van-field v-model="user.password2" type="password" label="确认密码" maxlength="20" />
       </van-cell-group>
       <van-button type="primary" color="#36c1ba" block @click="register">立即注册</van-button>
       <div class="mt-sm">
@@ -33,7 +34,8 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
+        password2: ""
       }
     };
   },
@@ -47,7 +49,11 @@ export default {
   methods: {
     async register() {
       if (!this.isValid) {
-        Toast("信息不正确");
+        Toast("请填写完整信息");
+        return;
+      }
+      if (this.user.password !== this.user.password2) {
+        Toast("两次密码不一致");
         return;
       }
       let { code, data, msg } = await this.$api.register(this.user);
