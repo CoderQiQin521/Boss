@@ -1,7 +1,30 @@
 <template>
   <div>
-    <van-nav-bar title="个人信息" left-arrow @click-left="$router.back()" @click-right="onClickRight"></van-nav-bar>
-    <van-empty style="margin-top:80px" description="开发中" />
+    <van-nav-bar title="个人信息" left-arrow @click-left="$router.back()"></van-nav-bar>
+    <van-cell-group>
+      <van-field v-model="user.realname" label="真实姓名" placeholder="请输入您的姓名" />
+      <!-- <van-field
+        v-model="user.gender"
+        label="性别"
+        placeholder="请选择您的性别"
+        readonly
+        click-input="openGender"
+      />-->
+      <van-cell title="性别" is-link :value="user.gender" @click="openGender" />
+    </van-cell-group>
+    <van-popup v-model="selectGender" position="bottom" :style="{}">
+      <van-picker
+        title="性别"
+        show-toolbar
+        :columns="columns"
+        @confirm="onConfirm"
+        @cancel="onCancel"
+        @change="onChange"
+      />
+    </van-popup>
+    <div class="page">
+      <van-button class="mt-md" type="primary" color="#36c1ba" block @click="save">保存</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -9,15 +32,43 @@ export default {
   name: "",
   props: {},
   data() {
-    return {};
+    return {
+      selectGender: false,
+      columns: ["男", "女", "保密"],
+      user: {
+        realname: "",
+        gender: ""
+      }
+    };
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    async fetch() {},
+    async save() {
+      let { code, data, msg } = await this.$api.saveInfo(this.user);
+      if (code === 0) {
+      }
+    },
+    openGender() {
+      this.selectGender = true;
+    },
+    onConfirm(res) {
+      this.selectGender = false;
+      this.$set(this.user, "gender", res);
+    },
+    onCancel() {
+      this.selectGender = false;
+    },
+    onChange(res) {}
+  }
 };
 </script>
 <style lang="less">
 .van-nav-bar .van-icon {
   color: #5d5d5d !important;
+}
+.mt-md {
+  margin-top: 15px;
 }
 </style>

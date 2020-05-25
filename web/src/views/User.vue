@@ -2,13 +2,15 @@
   <div>
     <div class="user-panel">
       <div class="text-right">
-        <van-icon name="scan" size="24" />
+        <router-link to="/login">
+          <van-icon name="scan" size="24" />
+        </router-link>
         <router-link to="/login">
           <van-icon name="setting-o" class="setting-icon" size="24" />
         </router-link>
       </div>
       <div class="user">
-        <div class="username">齐秦</div>
+        <div class="username">{{userInfo.realname}}</div>
         <div class="my-resume">
           <van-icon name="edit" class="edit-icon" />
           <router-link to="/resume">我的在线简历</router-link>
@@ -19,7 +21,7 @@
           width="70px"
           height="70px"
           @click="$router.push('/info')"
-          src="https://img.yzcdn.cn/vant/cat.jpeg"
+          :src="userInfo.avatar"
         />
       </div>
       <div class="info">
@@ -54,12 +56,21 @@ export default {
           count: 7,
           title: "收藏"
         }
-      ]
+      ],
+      userInfo: {}
     };
   },
-  created() {},
+  created() {
+    this.fetch();
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    async fetch() {
+      let userInfo = await this.$api.userInfo();
+      console.log("userInfo: ", userInfo);
+      this.userInfo = userInfo;
+    }
+  }
 };
 </script>
 <style lang="less" scoped>

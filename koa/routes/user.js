@@ -1,4 +1,5 @@
 const userModel = require('../model/user')
+const informationModel = require('../model/information')
 const jsonwebtoken = require('jsonwebtoken')
 const { SuccessMessage, ErrorMessage } = require('../utils/message')
 
@@ -11,7 +12,10 @@ module.exports = {
   },
   register: async (ctx) => {
     let user = ctx.request.body
-    let { username } = await userModel.create(user)
+    let { username, _id } = await userModel.create(user)
+    await informationModel.create({
+      userId: _id,
+    })
 
     ctx.body = new SuccessMessage({ data: { username }, msg: '注册成功' })
   },
@@ -31,9 +35,28 @@ module.exports = {
       ctx.body = new ErrorMessage({ msg: '密码错误' })
       return
     }
-    const token = jsonwebtoken.sign(ctx.request.body, 'iloveu901105', {
-      expiresIn: '1h',
-    })
+    const token = jsonwebtoken.sign(
+      {
+        userid: user._id,
+      },
+      'iloveu901105',
+      {
+        expiresIn: '1h',
+      }
+    )
     ctx.body = new SuccessMessage({ data: token, msg: '登陆成功' })
+  },
+  userinfo: async (ctx) => {
+    let { _id } = await ctx.user
+    let user = await informationModel.findOne({ userId: _id })
+    ctx.body = new SuccessMessage({ data: '123', msg: '获取成功' })
+  },
+  save: async (ctx) => {
+    let body = ctx.request.body
+    let { _id } = ctx.user
+    // 根据关联的userid 更新数据
+
+    // await informationModel.findByIdAndUpdate(_id, body)
+    ctx.body = new SuccessMessage({ data: null, msg: '更新成功' })
   },
 }
