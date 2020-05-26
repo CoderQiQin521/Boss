@@ -24,7 +24,9 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    onClickRight() {}
+  }
 };
 </script>
 <style lang="less">

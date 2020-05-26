@@ -13,7 +13,7 @@ router.get('/', async (ctx) => {
 router.get('/user', User.index)
 router.post('/register', User.register)
 router.post('/login', User.login)
-router.get('/userinfos', auth, User.userinfo)
+router.get('/userinfo', auth, User.userinfo)
 router.post('/save', auth, User.save)
 
 module.exports = router

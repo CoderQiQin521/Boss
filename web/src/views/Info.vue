@@ -2,7 +2,12 @@
   <div>
     <van-nav-bar title="个人信息" left-arrow @click-left="$router.back()"></van-nav-bar>
     <van-cell-group>
-      <van-field v-model="user.realname" label="真实姓名" placeholder="请输入您的姓名" />
+      <van-field
+        v-model="userInfo.realname"
+        label="真实姓名"
+        input-align="right"
+        placeholder="请输入您的姓名"
+      />
       <!-- <van-field
         v-model="user.gender"
         label="性别"
@@ -10,7 +15,7 @@
         readonly
         click-input="openGender"
       />-->
-      <van-cell title="性别" is-link :value="user.gender" @click="openGender" />
+      <van-cell title="性别" is-link :value="userInfo.gender" @click="openGender" />
     </van-cell-group>
     <van-popup v-model="selectGender" position="bottom" :style="{}">
       <van-picker
@@ -35,19 +40,27 @@ export default {
     return {
       selectGender: false,
       columns: ["男", "女", "保密"],
-      user: {
+      userInfo: {
         realname: "",
         gender: ""
       }
     };
   },
-  created() {},
+  created() {
+    this.fetch();
+  },
   mounted() {},
   methods: {
-    async fetch() {},
+    async fetch() {
+      let { code, data, msg } = await this.$api.userInfo();
+      this.userInfo = data;
+    },
     async save() {
-      let { code, data, msg } = await this.$api.saveInfo(this.user);
+      let { code, data, msg } = await this.$api.saveInfo(this.userInfo);
       if (code === 0) {
+        this.$utils.toast({ msg }).then(() => {
+          this.$router.back();
+        });
       }
     },
     openGender() {
@@ -55,7 +68,7 @@ export default {
     },
     onConfirm(res) {
       this.selectGender = false;
-      this.$set(this.user, "gender", res);
+      this.$set(this.userInfo, "gender", res);
     },
     onCancel() {
       this.selectGender = false;

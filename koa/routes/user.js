@@ -49,14 +49,13 @@ module.exports = {
   userinfo: async (ctx) => {
     let { _id } = await ctx.user
     let user = await informationModel.findOne({ userId: _id })
-    ctx.body = new SuccessMessage({ data: '123', msg: '获取成功' })
+    ctx.body = new SuccessMessage({ data: user, msg: '获取成功' })
   },
   save: async (ctx) => {
     let body = ctx.request.body
     let { _id } = ctx.user
     // 根据关联的userid 更新数据
-
-    // await informationModel.findByIdAndUpdate(_id, body)
+    await informationModel.findOne({ userId: _id }).updateOne(body)
     ctx.body = new SuccessMessage({ data: null, msg: '更新成功' })
   },
 }

@@ -5,12 +5,12 @@
         <router-link to="/login">
           <van-icon name="scan" size="24" />
         </router-link>
-        <router-link to="/login">
+        <router-link to="/setting">
           <van-icon name="setting-o" class="setting-icon" size="24" />
         </router-link>
       </div>
       <div class="user">
-        <div class="username">{{userInfo.realname}}</div>
+        <div class="username">{{userInfo.realname || '游客'}}</div>
         <div class="my-resume">
           <van-icon name="edit" class="edit-icon" />
           <router-link to="/resume">我的在线简历</router-link>
@@ -66,9 +66,8 @@ export default {
   mounted() {},
   methods: {
     async fetch() {
-      let userInfo = await this.$api.userInfo();
-      console.log("userInfo: ", userInfo);
-      this.userInfo = userInfo;
+      let { code, data, msg } = await this.$api.userInfo();
+      this.userInfo = data;
     }
   }
 };
