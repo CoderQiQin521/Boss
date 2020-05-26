@@ -3,7 +3,9 @@
     <van-nav-bar title="设置" left-arrow @click-left="$router.back()"></van-nav-bar>
     <div class="page">
       <!-- modal -->
-      <van-button type="default" block @click="logout">退出登录</van-button>
+      <div class="mt-lg">
+        <van-button type="default" block @click="logout">退出登录</van-button>
+      </div>
     </div>
   </div>
 </template>

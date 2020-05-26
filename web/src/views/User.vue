@@ -31,6 +31,10 @@
         </div>
       </div>
     </div>
+    <div class="foot-info text-center">
+      客服电话: 400-065-5799
+      <span>工作时间9:30-18:30</span>
+    </div>
   </div>
 </template>
 <script>
@@ -87,7 +91,7 @@ export default {
   right: 20px;
 }
 .user {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 40px;
 }
 .username {
@@ -116,6 +120,14 @@ export default {
       margin-top: 6px;
       color: rgba(255, 255, 255, 0.7);
     }
+  }
+}
+.foot-info {
+  margin-top: 50px;
+  font-size: 12px;
+  color: #999;
+  span {
+    margin-left: 10px;
   }
 }
 </style>

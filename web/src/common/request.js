@@ -1,9 +1,12 @@
 import axios from "axios";
 import Vue from "vue";
 import { Toast } from "vant";
+const { ip } = require("../../../config");
 
 const http = axios.create({
-  baseURL: "http://127.0.0.1:3000/api",
+  // 环境判断  开发-生产   家-公司
+  // baseURL: "http://127.0.0.1:3000/api",
+  baseURL: "http://" + ip + ":3000/api",
   timeout: 6000
 });
 

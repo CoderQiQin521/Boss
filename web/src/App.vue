@@ -32,6 +32,9 @@ body {
 .mt-sm {
   margin-top: 10px;
 }
+.mt-lg {
+  margin-top: 30px;
+}
 .text-light {
   color: #509799;
 }
