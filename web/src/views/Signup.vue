@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -60,10 +59,9 @@ export default {
       }
       let { code, data, msg } = await this.$api.register(this.user);
       if (code === 0) {
-        Toast(msg);
-        setTimeout(() => {
+        this.$utils.toast({ msg }).then(() => {
           this.$router.push("/login");
-        }, 1500);
+        });
       }
     }
   }

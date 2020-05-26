@@ -1,12 +1,11 @@
 import axios from "axios";
-import Vue from "vue";
 import { Toast } from "vant";
 const { ip } = require("../../../config");
 
 const http = axios.create({
   // 环境判断  开发-生产   家-公司
   // baseURL: "http://127.0.0.1:3000/api",
-  baseURL: "http://" + ip + ":3000/api",
+  baseURL: `http://${ip}:3000/api`,
   timeout: 6000
 });
 
@@ -42,32 +41,3 @@ http.interceptors.response.use(
 );
 
 export default http;
-
-/*
-http.interceptor.response(
-  response => {
-if (process.env.NODE_ENV === 'development') {
-  console.log(`接口地址: ${response.config.url}`, response.data)
-}
-if (response.statusCode !== 200) {
-  return Promise.reject(response)
-}
-if (response.data.code === 1) {
-
-} else if (response.data.code === 601 || response.data.code === 600) {
-  uni.reLaunch({
-    url: '/pages/login/login'
-  });
-} else {
-  uni.showToast({
-    title: response.data.msg,
-    icon: "none"
-  });
-}
-return Promise.resolve(response.data)
-  },
-err => {
-  return err
-}
-)
-*/
