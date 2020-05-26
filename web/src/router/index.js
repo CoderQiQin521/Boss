@@ -35,11 +35,17 @@ const routes = [
   {
     path: "/register",
     name: "register",
+    meta: {
+      public: true
+    },
     component: () => import(/* webpackChunkName: "register" */ "../views/Signup.vue")
   },
   {
     path: "/login",
     name: "login",
+    meta: {
+      public: true
+    },
     component: () => import(/* webpackChunkName: "login" */ "../views/Login.vue")
   },
   {
@@ -63,6 +69,13 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.public && !localStorage.token) {
+    return next("/login");
+  }
+  next();
 });
 
 export default router;
